@@ -1,0 +1,30 @@
+{
+  "name": "funjs_002",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test:watch": "./node_modules/.bin/mocha --watch --recursive --require @babel/register"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.18.0",
+    "ramda": "0.26.1",
+    "source-map-support": "0.5.12"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/node": "7.4.5",
+    "@babel/preset-env": "7.4.5",
+    "@babel/register": "7.4.4",
+    "chai": "4.2.0",
+    "mocha": "6.1.4",
+    "sinon": "7.3.2"
+  }
+}
