@@ -12,4 +12,4 @@ function main() {
     return account.getActiveAccounts()
 }
 
-export {main}
+export { main }

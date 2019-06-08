@@ -1,8 +1,7 @@
 import { describe, it, beforeEach, afterEach } from 'mocha'
 import sinon from 'sinon'
+import proxyquire from 'proxyquire'
 import chai, { expect } from 'chai'
-import axios from 'axios'
-import { main } from '../src/index'
 
 const accounts = [
     {
@@ -19,20 +18,17 @@ const accounts = [
     }
 ]
 
+const httpGetStub = sinon.stub()
+
+const httpStub = {
+    get: httpGetStub
+}
+
+const { main } = proxyquire('../src/index.js', {
+    'axios': httpStub
+})
+
 describe('index.js', () => {
-    let sandbox
-    let axiosGetStub
-
-    beforeEach(() => {
-        sandbox = sinon.createSandbox()
-        axiosGetStub = sandbox.stub()
-        axios.get = axiosGetStub
-    })
-
-    afterEach(() => {
-        sandbox.restore()
-    })
-
     it('should return a valid Account', async () => {
         const expected = [
             {
@@ -41,7 +37,7 @@ describe('index.js', () => {
             }
         ]
 
-        axiosGetStub.withArgs('/accounts/account_001').resolves({ data: accounts})
+        httpGetStub.withArgs('/accounts/account_001').resolves({ data: accounts})
         const result = await main()
         expect(result).to.deep.eql(expected)
     })
